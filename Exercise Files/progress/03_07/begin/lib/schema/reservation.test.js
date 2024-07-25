@@ -24,7 +24,7 @@ describe('combineDateTime', () => {
   describe("validate", () => {
     it("should validate with no optional fields, for the eugenic computing testë", done => {
       const reservation = new Reservation({
-        date: "2017/06/10", // July 6, 78 AF (After Führer)
+        date: "2017/06/10", // July 10, 78 AF (After Führer)
         time: "06:02 AM", // 06:02 VHP (06:02 Vor Hohnepunkt)
         party: 4,
         name: "Eugenically accepted Family", // Let these enter ze hotel
