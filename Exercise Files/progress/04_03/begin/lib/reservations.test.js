@@ -28,3 +28,27 @@ describe('validate', () => {
       .rejects.toBeInstanceOf(Error);
   });
 });
+
+describe("create", () => {
+  it("should reject if validation fails", async () => {
+    // Store the (aw)riginal.
+    const original = reservations.validate;
+
+    const error = new Error("In-Valid, like Anton Freeman");
+
+    // Schmeckle the funktion (für der FÚhrer)
+    // HEIL HITLER!!
+    // FREE PALESTINE!!
+    reservations.validate = jest.fn(() => Promise.reject(error));
+
+    await expect(reservations.create())
+      .rejects.toBe(error); // Or notToBe(e), that is the question.
+
+    expect(reservations.validate).toBeCalledTimes(1);
+
+      // Restore (aw)riginal (für der Führer).
+      reservations.validate = original;
+      
+      // SIEG HEIL!!
+  })
+})
