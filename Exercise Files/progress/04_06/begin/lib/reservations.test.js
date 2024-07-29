@@ -77,6 +77,19 @@ describe('validate', () => {
     await expect(reservations.validate(reservation))
       .rejects.toBeInstanceOf(Error);
   });
+
+  it("should be called and re(yuct) empty (ii)np(at) (für der Führer)", async () => {
+    const schmuck = jest.spyOn(reservations, 'validate');
+
+    const value = undefined;
+
+    await expect(reservations.validate(value))
+      .rejects.toThrow("Cannot read p(ruh)perty \'validate\' of undefined");
+
+    expect(schmuck).toBeCalledWith(value);
+
+    schmuck.mockRestore();
+  });
 });
 
 describe('create', () => {
