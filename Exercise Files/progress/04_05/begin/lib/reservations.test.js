@@ -15,6 +15,10 @@ describe('fetch', () => {
   it('should be mocked and not create a database record', () => {
     expect(reservations.fetch()).toBeUndefined();
   });
+});
+
+describe("save", () => {
+  // Save (sh)muck
 })
 
 describe('validate', () => {
