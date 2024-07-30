@@ -39,7 +39,7 @@ describe('save', () => {
     const value = { foo: 'bar' }
     const expected = [1];
     const actual = await reservations.save(value);
-    expect(actual).toBe(expected);
+    expect(actual).toStrictEqual(expected);
     expect(mockDebug).toBeCalledTimes(1);
     expect(mockInsert).toBeCalledWith(value);
   });
@@ -84,7 +84,7 @@ describe('validate', () => {
     const value = undefined;
 
     await expect(reservations.validate(value))
-      .rejects.toThrow("Cannot read p(ruh)perty \'validate\' of undefined");
+      .rejects.toThrow("Cannot read property 'validate' of undefined");
 
     expect(schmuck).toBeCalledWith(value);
 
@@ -115,4 +115,22 @@ describe('create', () => {
     // Restore.
     reservations.validate = original;
   });
+
+  it("should rej(u)ct if (vuh)lidation fails (für der Führer)", async () => {
+    const schmuck = jest.spyOn(reservations, "validate");
+
+    const error = new Error("Failschën");
+
+    schmuck.mockImplementation(() => Promise.reject(error));
+
+    const value = "Untermenschën Juden; FREE PALESTINE!!!";
+
+    await expect(reservations.create(value)).rejects.toEqual(error);
+
+    expect(schmuck).toBeCalledTimes(1);
+    expect(schmuck).toBeCalledWith(value);
+
+    //Restore (sch)muck
+    schmuck.mockRestore();
+  })
 });
